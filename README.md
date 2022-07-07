@@ -13,7 +13,9 @@ Creat inventory file for declare managed host
 - Store encrypted pass in vault-pass file "echo '(password)' > vault-pass
 - Give vault-pass permission 600
 - Run playbook with vault-pass "ansible-playbook --vault-password-file=vault-pass quiz2-tasks.yml"
-
+# check login
+- Random check with "RAND_NUMBER=$(python3 -c "import random; print(random.randrange(1,20))")"
+- ssh managed host "ssh (hostname/ip) -l (user)${RAND_NUMBER}"
 <br>
 <br>
   
