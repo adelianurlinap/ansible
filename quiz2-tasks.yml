@@ -1,0 +1,39 @@
+- name: create user accounts pod-adelianurlinap-managed1
+  hosts: pod-adelianurlinap-managed1
+  become: true
+
+  vars_files:
+    - secret.yml
+    - group_vars/managed1-host-adelianurlinap.yml
+  tasks:
+    - name: Creating user ops1-50
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_ops_managed1 }}"
+
+    - name: Creating user dev1-50
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_dev_managed1 }}"
+
+- name: create user accounts pod-adelianurlinap-managed2
+  hosts: pod-adelianurlinap-managed2
+  become: true
+
+  vars_files:
+    - secret.yml
+    - group_vars/managed2-host-adelianurlinap.yml
+  tasks:
+    - name: Creating user ops51-1000
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_ops_managed2 }}"
+      
+    - name: Creating user dev51-100
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{ list_user_dev_managed2 }}"
